@@ -254,6 +254,7 @@ private fun KernelFrequencyPreference(
     maxFreq: Int,
     defaultValue: Int,
     value: Int?,
+    displayDivisor: Int = 1000,
     onCommit: ((Int) -> Unit)?,
 ) {
     Column(
@@ -272,6 +273,7 @@ private fun KernelFrequencyPreference(
             interval = 100000,
             defaultValue = defaultValue,
             value = value,
+            displayDivisor = displayDivisor,
             onValueCommitted = onCommit,
         )
     }
@@ -389,6 +391,7 @@ private fun GpuGroup(
                 maxFreq = maxFreq,
                 defaultValue = minControl.defaultValue,
                 value = minControl.currentValue,
+                displayDivisor = 1,
                 onCommit = { value ->
                     setKernelControl(kernelManager, minControl, value, onKernelControlsChanged)
                 },
@@ -402,6 +405,7 @@ private fun GpuGroup(
                 maxFreq = maxFreq,
                 defaultValue = maxControl.defaultValue,
                 value = maxControl.currentValue,
+                displayDivisor = 1,
                 onCommit = { value ->
                     setKernelControl(kernelManager, maxControl, value, onKernelControlsChanged)
                 },

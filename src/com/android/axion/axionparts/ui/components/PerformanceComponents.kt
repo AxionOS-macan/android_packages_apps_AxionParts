@@ -49,6 +49,7 @@ fun FrequencySlider(
     min: Int = 0,
     max: Int = 0,
     interval: Int = 100000,
+    displayDivisor: Int = 1000,
     defaultValue: Int = min,
     value: Int? = null,
     onValueCommitted: ((Int) -> Unit)? = null,
@@ -81,7 +82,11 @@ fun FrequencySlider(
                 color = MaterialTheme.colorScheme.onSurface,
             )
             Text(
-                text = stringResource(R.string.mhz_format, currentValue.roundToInt() / 1000),
+                text =
+                    stringResource(
+                        R.string.mhz_format,
+                        currentValue.roundToInt() / displayDivisor,
+                    ),
                 style = MaterialTheme.typography.labelLarge,
                 color = accentColor,
             )
@@ -144,15 +149,15 @@ fun FrequencySlider(
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             val minDisplay =
                 if (availableFrequencies != null && availableFrequencies.isNotEmpty()) {
-                    availableFrequencies.minOrNull()?.div(1000) ?: 0
+                    availableFrequencies.minOrNull()?.div(displayDivisor) ?: 0
                 } else {
-                    min / 1000
+                    min / displayDivisor
                 }
             val maxDisplay =
                 if (availableFrequencies != null && availableFrequencies.isNotEmpty()) {
-                    availableFrequencies.maxOrNull()?.div(1000) ?: 0
+                    availableFrequencies.maxOrNull()?.div(displayDivisor) ?: 0
                 } else {
-                    max / 1000
+                    max / displayDivisor
                 }
 
             Text(
