@@ -1023,6 +1023,39 @@ fun AodContent(modifier: Modifier = Modifier) {
             }
         }
 
+        Spacer(modifier = Modifier.height(12.dp))
+
+        PreferenceGroup(title = stringResource(R.string.aod_brightness)) {
+            item {
+                SystemSettingSlider(
+                    settingKey = "aod_low_brightness",
+                    title = stringResource(R.string.aod_low_brightness),
+                    summary = stringResource(R.string.aod_low_brightness_summary),
+                    min = 1,
+                    max = 255,
+                    defaultValue = 8,
+                )
+            }
+            item {
+                SystemSettingSlider(
+                    settingKey = "aod_high_brightness",
+                    title = stringResource(R.string.aod_high_brightness),
+                    summary = stringResource(R.string.aod_high_brightness_summary),
+                    min = 1,
+                    max = 255,
+                    defaultValue = 60,
+                )
+            }
+            item {
+                SystemSettingSwitch(
+                    settingKey = "aod_pickup_brightness_boost",
+                    title = stringResource(R.string.aod_pickup_brightness_boost),
+                    summary = stringResource(R.string.aod_pickup_brightness_boost_summary),
+                    defaultValue = false,
+                )
+            }
+        }
+
         AnimatedVisibility(
             visible = scheduleMode == "3" || scheduleMode == "4",
             enter = fadeIn() + expandVertically(),
