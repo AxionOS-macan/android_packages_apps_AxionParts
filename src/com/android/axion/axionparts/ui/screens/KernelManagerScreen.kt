@@ -256,6 +256,7 @@ private fun KernelFrequencyPreference(
     availableFreqs: List<Int>,
     maxFreq: Int,
     defaultValue: Int,
+    displayDivisor: Int = 1000,
     onCommit: ((Int) -> Unit)?,
 ) {
     val secureFlow = rememberSettingsFlow(SettingsType.SECURE)
@@ -277,6 +278,7 @@ private fun KernelFrequencyPreference(
             interval = 100000,
             defaultValue = defaultValue,
             value = persistedValue,
+            displayDivisor = displayDivisor,
             onValueCommitted = { selectedValue ->
                 secureFlow.putInt(settingKey, selectedValue)
                 onCommit?.invoke(selectedValue)
@@ -396,6 +398,7 @@ private fun GpuGroup(
                 availableFreqs = availableFreqs,
                 maxFreq = maxFreq,
                 defaultValue = minControl.defaultValue,
+                displayDivisor = 1,
                 onCommit = { setKernelControl(kernelManager, minControl, it, onKernelControlsChanged) },
             )
         }
@@ -406,6 +409,7 @@ private fun GpuGroup(
                 availableFreqs = availableFreqs,
                 maxFreq = maxFreq,
                 defaultValue = maxControl.defaultValue,
+                displayDivisor = 1,
                 onCommit = { setKernelControl(kernelManager, maxControl, it, onKernelControlsChanged) },
             )
         }
